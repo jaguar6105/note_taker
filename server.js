@@ -10,6 +10,7 @@ var PORT = 8050;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 
 
