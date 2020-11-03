@@ -14,6 +14,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 
 const notes = [];
+const ids = [];
 
 
 // This is the home page
@@ -44,16 +45,16 @@ app.post("/api/notes", function (req, res) {
     }
 
     notes.push(newNote);
+    ids.push(newNote.title);
 
     res.json(newNote);
 });
 
 //deletes notes array
 app.delete("/api/notes/:id", function (req, res) {
-    for (let i = 0; i < notes.length; i++) {
-        if (notes[i].title === req.params.id) {
-            notes.splice(i, 1);
-        }
+    if (ids.includes(req.params.id)) {
+        notes.splice(ids.indexOf(req.params.id, 1));
+        ids.splice(ids.indexOf(req.params.id, 1));
     }
 });
 
