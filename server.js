@@ -38,16 +38,14 @@ app.post("/api/notes", function (req, res) {
 
     newNote.routeName = newNote.title.replace(/\s+/g, "").toLowerCase();
 
-    for (let i = 0; i < notes.length; i++) {
-        if (notes[i].title == req.body.title) {
-            return;
-        }
+    if(!ids.includes(newNote.title)) {
+        notes.push(newNote);
+        ids.push(newNote.title);
+    
+        res.json(newNote);
+    
     }
-
-    notes.push(newNote);
-    ids.push(newNote.title);
-
-    res.json(newNote);
+  
 });
 
 //deletes notes array
